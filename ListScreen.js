@@ -4,10 +4,10 @@ import {
   Text,
   View,
   FlatList,
-  Button,
   TouchableOpacity,
   Image,
 } from "react-native";
+import { ListItem, Avatar } from "react-native-elements";
 
 const ListScreen = ({ navigation, route }) => {
   const { list } = route.params;
@@ -24,7 +24,7 @@ const ListScreen = ({ navigation, route }) => {
   );
 
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={list}
         renderItem={({ item, index }) => (
@@ -32,36 +32,67 @@ const ListScreen = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("Details", { obj: item, type: type })
             }
-            style={styles.item}
+            // style={styles.item}
           >
             {type == "prod" ? (
-              <>
-                <Text style={{ fontSize: 25, marginVertical: 8 }}>
-                  Item Name: {item.name}
-                </Text>
-                <Image source={{ uri: item.img }} style={styles.img} />
-              </>
-            ) : type == "emp" ? (
-              <>
-                <Text style={{ fontSize: 25, marginVertical: 8 }}>
-                  Employee Name: {item.name}
-                </Text>
-                <Text style={{ fontSize: 25, marginVertical: 8 }}>
-                  Designation: {item.designation}
-                </Text>
-              </>
+              <ListItem bottomDivider>
+                <Avatar rounded size="medium" source={{ uri: item.img }} />
+                <ListItem.Content>
+                  <ListItem.Title>{item.name}</ListItem.Title>
+                </ListItem.Content>
+                <ListItem.Chevron />
+              </ListItem>
+            ) : // <>
+            //   <Text style={{ fontSize: 25, marginVertical: 8 }}>
+            //     Item Name: {item.name}
+            //   </Text>
+            //   <Image source={{ uri: item.img }} style={styles.img} />
+            // </>
+            type == "emp" ? (
+              // <>
+              //   <Text style={{ fontSize: 25, marginVertical: 8 }}>
+              //     Employee Name: {item.name}
+              //   </Text>
+              //   <Text style={{ fontSize: 25, marginVertical: 8 }}>
+              //     Designation: {item.designation}
+              //   </Text>
+              // </>
+              <ListItem bottomDivider>
+                <Avatar
+                  rounded
+                  source={{
+                    uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+                  }}
+                />
+                <ListItem.Content>
+                  <ListItem.Title>{item.name}</ListItem.Title>
+                  <ListItem.Subtitle>{item.designation}</ListItem.Subtitle>
+                </ListItem.Content>
+                <ListItem.Chevron />
+              </ListItem>
             ) : type == "order" ? (
-              <>
-                <Text style={{ fontSize: 25, marginVertical: 8 }}>
-                  Order Number: {item.ONumber}
-                </Text>
-                <Text style={{ fontSize: 25, marginVertical: 8 }}>
-                  Item Name: {item.name}
-                </Text>
-                <Text style={{ fontSize: 25, marginVertical: 8 }}>
-                  Price: {item.price}
-                </Text>
-              </>
+              // <>
+              //   <Text style={{ fontSize: 25, marginVertical: 8 }}>
+              //     Order Number: {item.ONumber}
+              //   </Text>
+              //   <Text style={{ fontSize: 25, marginVertical: 8 }}>
+              //     Item Name: {item.name}
+              //   </Text>
+              //   <Text style={{ fontSize: 25, marginVertical: 8 }}>
+              //     Price: {item.price}
+              //   </Text>
+              // </>
+              <ListItem bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Title style={{ fontWeight: "bold" }}>
+                    {item.ONumber}
+                  </ListItem.Title>
+                  <ListItem.Title>{item.name}</ListItem.Title>
+
+                  <ListItem.Subtitle>{item.price}</ListItem.Subtitle>
+                </ListItem.Content>
+                <ListItem.Chevron />
+              </ListItem>
             ) : null}
           </TouchableOpacity>
         )}

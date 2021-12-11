@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { Avatar } from "react-native-elements";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { obj } = route.params;
@@ -18,13 +19,26 @@ const DetailsScreen = ({ navigation, route }) => {
     <View style={styles.container}>
       {type === "prod" ? (
         <>
+          <Avatar
+            rounded
+            size="xlarge"
+            source={{
+              uri: obj.img,
+            }}
+          />
           <Text style={styles.txt}>Name:{obj.name}</Text>
           <Text style={styles.txt}>Price:{obj.price}</Text>
           <Text style={styles.txt}>Quantity: {obj.qty}</Text>
-          <Image source={{ uri: obj.img }} style={styles.img} />
         </>
       ) : type === "emp" ? (
         <>
+          <Avatar
+            rounded
+            size="xlarge"
+            source={{
+              uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+            }}
+          />
           <Text style={styles.txt}>Name: {obj.name}</Text>
           <Text style={styles.txt}>Designation: {obj.designation}</Text>
           <Text style={styles.txt}>Age: {obj.age}</Text>
